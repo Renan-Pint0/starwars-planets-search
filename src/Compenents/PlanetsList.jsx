@@ -64,7 +64,6 @@ function PlanetList() {
     });
     return filtredData.every((planet) => planet);
   };
-  console.log(selected);
   return (
     <div>
       <div className="filter-class">
@@ -112,7 +111,6 @@ function PlanetList() {
           data-testid="button-filter"
           onClick={ () => {
             setSelectedFilters([...selectedFilters, selected]);
-            console.log(columnsNames.filter(handleOptions));
             setSelected({
               column: '',
               condition: 'maior que',
@@ -121,6 +119,20 @@ function PlanetList() {
           } }
         >
           Filtrar
+        </button>
+        <button
+          type="submit"
+          data-testid="button-remove-filters"
+          onClick={ () => {
+            setSelectedFilters([]);
+            setSelected({
+              column: '',
+              condition: 'maior que',
+              value: 0,
+            });
+          } }
+        >
+          Limpar
         </button>
       </div>
       <table>
