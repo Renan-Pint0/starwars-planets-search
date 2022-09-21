@@ -6,9 +6,11 @@ function PlanetList() {
   const { planets, setPlanets } = useContext(AppContext);
   const { filterByName } = useContext(AppContext);
   useEffect(() => {
-    if (filterByName.length > 0) {
+    if (filterByName !== '') {
+      console.log('p');
       const filteredPlanets = [];
-      planets.map(
+      const data = planets;
+      data.filter(
         (planet) => {
           if ((planet.name).toLowerCase().includes(filterByName.toLowerCase())) {
             filteredPlanets.push(planet);
@@ -17,6 +19,17 @@ function PlanetList() {
         },
       );
       setPlanets(filteredPlanets);
+      console.log(filteredPlanets);
+      console.log(planets);
+    }
+    if (filterByName === '') {
+      console.log('1');
+      const getPlanets = async () => {
+        const { results } = await fetch('https://swapi.dev/api/planets').then((Response) => Response.json());
+        results.map((result) => delete result.residents);
+        setPlanets(results);
+      };
+      getPlanets();
     }
   }, [filterByName]);
   return (
