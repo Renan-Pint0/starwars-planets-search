@@ -5,6 +5,7 @@ import AppContext from './AppContext';
 function Provider({ children }) {
   const endpoint = 'https://swapi.dev/api/planets';
   const [planets, setPlanets] = useState(['']);
+  const [filterByName, setFilterByName] = useState('');
   useEffect(() => {
     const getPlanets = async () => {
       const { results } = await fetch(endpoint).then((Response) => Response.json());
@@ -16,6 +17,8 @@ function Provider({ children }) {
   const contextValue = {
     planets,
     setPlanets,
+    filterByName,
+    setFilterByName,
   };
 
   return (
