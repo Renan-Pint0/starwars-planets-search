@@ -16,6 +16,7 @@ function Header() {
         value={ filterByName }
         onChange={ handleChange }
         data-testid="name-filter"
+        placeholder="Filtro por Planeta"
       />
     </div>
   );
