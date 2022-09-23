@@ -6,8 +6,8 @@ function PlanetList() {
   const { planets, setPlanets } = useContext(AppContext);
   const { filterByName } = useContext(AppContext);
   const columnsNames = [
-    'population',
     'orbital_period',
+    'population',
     'diameter',
     'rotation_period',
     'surface_water',
@@ -64,18 +64,19 @@ function PlanetList() {
     });
     return filtredData.every((planet) => planet);
   };
+  const handleChange = ({ target: { name, value } }) => {
+    setSelected({ ...selected, [name]: value });
+  };
   return (
     <div>
       <div className="filter-class">
         Filtros:
         <select
-          name="column-filter"
+          name="column"
           id="column-filter"
           data-testid="column-filter"
           value={ selected.column }
-          onChange={
-            ({ target }) => { setSelected({ ...selected, column: target.value }); }
-          }
+          onChange={ handleChange }
         >
           {columnsNames.filter(handleOptions).map((column) => (
             <option value={ column } key={ column }>
@@ -84,13 +85,11 @@ function PlanetList() {
           ))}
         </select>
         <select
-          name="comparison-filter"
+          name="condition"
           id="comparison-filter"
           data-testid="comparison-filter"
           value={ selected.condition }
-          onChange={
-            ({ target }) => { setSelected({ ...selected, condition: target.value }); }
-          }
+          onChange={ handleChange }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
@@ -98,24 +97,17 @@ function PlanetList() {
         </select>
         <input
           type="number"
-          name="value-filter"
+          name="value"
           id="value-filter"
           data-testid="value-filter"
           value={ selected.value }
-          onChange={
-            ({ target }) => { setSelected({ ...selected, value: target.value }); }
-          }
+          onChange={ handleChange }
         />
         <button
           type="submit"
           data-testid="button-filter"
           onClick={ () => {
             setSelectedFilters([...selectedFilters, selected]);
-            setSelected({
-              column: '',
-              condition: 'maior que',
-              value: 0,
-            });
           } }
         >
           Filtrar
@@ -125,11 +117,6 @@ function PlanetList() {
           data-testid="button-remove-filters"
           onClick={ () => {
             setSelectedFilters([]);
-            setSelected({
-              column: '',
-              condition: 'maior que',
-              value: 0,
-            });
           } }
         >
           Limpar
