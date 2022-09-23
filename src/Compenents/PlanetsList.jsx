@@ -122,6 +122,25 @@ function PlanetList() {
           Limpar
         </button>
       </div>
+      {selectedFilters.map((filter, index) => (
+        <div data-testid="filter" key={ index }>
+          <button
+            type="button"
+            onClick={ () => {
+              const cloneFilters = [...selectedFilters];
+              cloneFilters.splice(index, 1);
+              setSelectedFilters(cloneFilters);
+            } }
+          >
+            𝙭
+          </button>
+          <span>
+            {filter.column}
+            {filter.condition}
+            {filter.value}
+          </span>
+        </div>
+      ))}
       <table>
         <tbody>
           <tr>
