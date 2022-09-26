@@ -8,7 +8,7 @@ function Header() {
   };
   return (
     <div>
-      <h1>Star Wars Project</h1>
+      <h1>Star Wars Database</h1>
       <input
         type="text"
         name="data-filter"
