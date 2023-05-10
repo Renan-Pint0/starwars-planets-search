@@ -12,6 +12,7 @@ function PlanetList() {
     'rotation_period',
     'surface_water',
   ];
+  const [order, setOrder] = useState(false);
   const [selected, setSelected] = useState({
     column: 'population',
     condition: 'maior que',
@@ -66,6 +67,10 @@ function PlanetList() {
   };
   const handleChange = ({ target: { name, value } }) => {
     setSelected({ ...selected, [name]: value });
+  };
+  const orderData = () => {
+    setOrder(!order);
+    console.log(order);
   };
   return (
     <div>
@@ -141,6 +146,12 @@ function PlanetList() {
           </span>
         </div>
       ))}
+      <button
+        type="submit"
+        onClick={ orderData }
+      >
+        Ordenar
+      </button>
       <table>
         <tbody>
           <tr>

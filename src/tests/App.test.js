@@ -15,8 +15,8 @@ describe('Testing the Star Wars aplication', () => {
   });
   test('Testing the PlanetList compenent', () => {
     render(<App />)
-    console.log(results[0]);
     expect(screen.getByText(/Filtros:/i)).toBeInTheDocument();
     expect(screen.getAllByRole('option').length).toBe(8)
+    expect(screen.getAllByRole('row').length).toBe(2)
   });
 });
